@@ -1,0 +1,29 @@
+{% extends 'backbone/base.html' %}
+{% load staticfiles %}
+
+{% block main %}
+  <div id="todo">
+  </div>
+  <div id="todo0">
+  </div>
+  <div id="todo1">
+  </div>
+  <div id="todo2">
+  </div>
+{% endblock main %}
+{% block extra_js %}
+{{ block.super }}
+  <script type="text/template" id="item-template">
+    <div>
+      <input id="todo_complete" type="checkbox" <%= completed ? 'checked="checked"' : '' %> />
+      <%- title %>
+      <%- language %>
+      <%- content %>
+      <%- owner %>
+    </div>
+  </script>
+  <script src="{% static 'backbone/demo.js' %}"></script>
+{% endblock extra_js %}
+</body>
+</html>
+
