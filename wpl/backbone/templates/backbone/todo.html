@@ -2,28 +2,64 @@
 {% load staticfiles %}
 
 {% block main %}
-  <div id="todo">
-  </div>
-  <div id="todo0">
-  </div>
-  <div id="todo1">
-  </div>
-  <div id="todo2">
-  </div>
+    <section id="todoapp">
+        <header id="header">
+            <h1>todos</h1>
+            <input id="new-todo" placeholder="What needs to be done?" autofocus>
+        </header>
+        <section id="main">
+            <input id="toggle-all" type="checkbox">
+            <label for="toggle-all">Mark all as complete</label>
+            <ul id="todo-list"></ul>
+        </section>
+        <footer id="footer"></footer>
+    </section>
+    <div id="info">
+        <p>Double-click to edit a todo</p>
+        <p>Written by <a href="https://github.com/addyosmani">Addy Osmani</a></p>
+        <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+    </div>
 {% endblock main %}
+{% block extra_templates %}
+  <script type="text/template" id="item-template">
+    <div class="view">
+      <input class="toggle" type="checkbox" <%= completed ? 'checked' : '' %>>
+      <label><%- title %></label>
+      <button class="destroy"></button>
+    </div>
+    <input class="edit" value="<%- title %>">
+  </script>
+      <script type="text/template" id="stats-template">
+    <span id="todo-count"><strong><%= remaining %></strong> <%= remaining === 1 ? 'item' : 'items' %> left</span>
+    <ul id="filters">
+      <li>
+        <a class="selected" href="#/">All</a>
+      </li>
+      <li>
+        <a href="#/active">Active</a>
+      </li>
+      <li>
+        <a href="#/completed">Completed</a>
+      </li>
+    </ul>
+    <% if (completed) { %>
+    <button id="clear-completed">Clear completed (<%= completed %>)</button>
+    <% } %>
+  </script>
+{% endblock %}
+
 {% block extra_js %}
 {{ block.super }}
-  <script type="text/template" id="item-template">
-    <div>
-      <input id="todo_complete" type="checkbox" <%= completed ? 'checked="checked"' : '' %> />
-      <%- title %>
-      <%- language %>
-      <%- content %>
-      <%- owner %>
-    </div>
-  </script>
-  <script src="{% static 'backbone/demo.js' %}"></script>
+    <script type="text/template" id="stats-template"></script>
+    <script src="{% static 'backbone/models/todo.js' %}"></script>
+    <script src="{% static 'backbone/collections/todos.js' %}"></script>
+    <script src="{% static 'backbone/views/todo-view.js' %}"></script>
+    <script src="{% static 'backbone/views/app-view.js' %}"></script>
+    <script src="{% static 'backbone/routers/router.js' %}"></script>
+    <script src="{% static 'backbone/app.js' %}"></script>
 {% endblock extra_js %}
-</body>
-</html>
 
+{% block extra_css %}
+    {{ block.super }}
+<link rel="stylesheet" href="{% static 'backbone/css/base.css' %}">
+{% endblock extra_css %}

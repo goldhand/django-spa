@@ -7,9 +7,9 @@ from .models import Post, LANGUAGE_CHOICES
 
 
 class PostSerializer(serializers.HyperlinkedModelSerializer):
-	owner = serializers.Field(source='owner.username')
+    owner = serializers.Field(source='owner.username')
 
-	class Meta:
-		model = Post
-		fields = ('url', 'owner', 'title', 'language', 'content')
+    class Meta:
+        model = Post
+        fields = ('id', 'url', 'created', 'owner', 'title', 'language', 'content')
 
