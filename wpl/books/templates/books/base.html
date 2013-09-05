@@ -8,12 +8,14 @@
   <meta name="description" content="{% block meta_description %}{% endblock meta_description %}">
 {#<meta name="csrf-token" content="{{csrf_token}}">#}
 {% block meta %}{% endblock meta %}
+    <link rel="stylesheet" href="{% static 'books/css/jquery-ui-1.10.3.custom.min.css' %}">
 {% block extra_css %}{% endblock extra_css %}
 </head>
 <body>
 {% block main %}{% endblock main %}
 {% csrf_token %}
 <script src="{% static 'books/js/lib/jquery-1.10.2.min.js' %}"></script>
+<script src="{% static 'books/js/lib/jquery-ui-1.10.3.custom.min.js' %}"></script>
 <script src="{% static 'books/js/lib/underscore-min.js' %}"></script>
 <script src="{% static 'books/js/lib/backbone-min.js' %}"></script>
 <script src="{% static 'books/js/lib/backbone.localStorage.js' %}"></script>

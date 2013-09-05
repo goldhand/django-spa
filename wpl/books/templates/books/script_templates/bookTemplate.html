@@ -1,5 +1,6 @@
+{% load static %}
 <script id="bookTemplate" type="text/template">
-    <img src="<%= coverImage %>"/>
+    <img src="{{ MEDIA_URL }}/<%= coverImage %>"/>
     <ul>
         <li><%= title %></li>
         <li><%= author %></li>

@@ -36,9 +36,6 @@ class BookList(mixins.ListModelMixin,
         return self.list(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        #print(request.DATA)
-        print(request.user)
-        print(request.body)
         return self.create(request, *args, **kwargs)
 
 

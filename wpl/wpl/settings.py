@@ -40,7 +40,9 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, *MEDIA_URL.strip("/").split("/"))
 
 TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
 
-STATICFILES_DIRS = ()
+STATICFILES_DIRS = (
+    '/home/wpl/Workspace/django/wpl/static',
+)
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
