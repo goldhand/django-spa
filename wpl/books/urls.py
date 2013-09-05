@@ -1,5 +1,3 @@
-from rest_framework.urlpatterns import format_suffix_patterns
-
 try:
     from django.conf.urls import *
 except ImportError:  # django < 1.4
@@ -33,14 +31,3 @@ urlpatterns = patterns('books.views',
                        url(r'^(?P<pk>[0-9]+)/$', book_detail, name='book-detail'),
                        url(r'^backbone/', 'backbone_view', name='backbone')
 )
-urlpatterns = patterns('books.views',
-                       url(r'^$',
-                           views.BookList.as_view(),
-                           name='book-list'),
-                       url(r'^(?P<pk>[0-9]+)/$',
-                           views.BookDetail.as_view(),
-                           name='book-detail'),
-                       url(r'^backbone/', 'backbone_view', name='backbone')
-)
-
-urlpatterns = format_suffix_patterns(urlpatterns)
