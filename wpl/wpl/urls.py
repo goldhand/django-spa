@@ -12,6 +12,7 @@ urlpatterns = patterns('',
                        # url(r'^admin/', include(admin.site.urls)),
                        url(r'^todo/', include("backbone.urls")),
                        url(r'^blog/', include('blog.urls')),
+                       url(r'^books/', include('books.urls', namespace='books')),
                        url(r'^', include('snippets.urls')),
                        #url(r'^', include(router.urls)),
 )
