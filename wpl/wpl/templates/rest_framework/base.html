@@ -1,7 +1,7 @@
 {% load url from future %}
 {% load rest_framework %}
 <!DOCTYPE html>
-<html>
+{% block html_tag %}<html>{% endblock html_tag %}
     <head>
     {% block head %}
 
@@ -68,7 +68,9 @@
     {% endblock %}
 
     <!-- Content -->
+    {% block content %}
     <div id="content">
+
 
         {% if 'GET' in allowed_methods %}
             <form id="get-form" class="pull-right">
@@ -212,6 +214,7 @@
         <!-- END content-main -->
 
     </div>
+    {% endblock content %}
     <!-- END Content -->
 
         <div id="push"></div>

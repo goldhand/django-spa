@@ -1,0 +1,29 @@
+{% verbatim %}
+<div class="container">
+  <div class="row">
+    <div class="span3">
+      <!--Sidebar content-->
+
+      Search: <input ng-model="query" class="input-block-level">
+      Sort by:
+      <select ng-model="orderProp" class="input-block-level">
+        <option value="title">Alphabetical</option>
+        <option value="created">Newest</option>
+      </select>
+
+    </div>
+    <div class="span9">
+      <!--Body content-->
+
+      <ul class="posts">
+        <li ng-repeat="post in posts | filter:query | orderBy:orderProp" class="thumbnail">
+          <a href="#/posts/{{post.id}}" class="thumb"></a>
+          <a href="#/posts/{{post.id}}">{{post.title}}</a>
+          <p>{{post.content}}</p>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>
+{% endverbatim %}

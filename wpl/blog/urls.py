@@ -28,6 +28,9 @@ post_detail = PostViewSet.as_view({
 urlpatterns = patterns('blog.views',
 	url(r'^$', 'blog'),
 	url(r'^posts/$', post_list, name='post-list'),
-        url(r'^posts/(?P<pk>[0-9]+)/$', post_detail, name='post-detail'),
-)
+    url(r'^posts/(?P<pk>[0-9]+)/$', post_detail, name='post-detail'),
+    url(r'^app/index\.html', 'angular_view'),
+    url(r'^angular/partials/post-list\.html', 'angular_view_post_list'),
+    url(r'^angular/partials/post-detail\.html', 'angular_view_post_detail'),
+    )
 
