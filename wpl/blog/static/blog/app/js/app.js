@@ -3,7 +3,7 @@
 /* App Module */
 
 //noinspection JSValidateTypes
-angular.module('posts', []).
+angular.module('posts', ['postsServices']).
   config(['$routeProvider', function($routeProvider) {
   $routeProvider.
       when('/posts', {templateUrl: '/blog/angular/partials/post-list.html',   controller: PostListCtrl}).

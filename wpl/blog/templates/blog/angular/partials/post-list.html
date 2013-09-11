@@ -11,17 +11,23 @@
         <option value="created">Newest</option>
       </select>
 
+        <ul class="posts nav nav-stacked nav-pills">
+            <li ng-repeat="post in posts | filter:query | orderBy:orderProp" class="thumbnail">
+                <a ng-click="viewDetail(post)">{{post.title}}</a>
+            </li>
+        </ul>
+
     </div>
     <div class="span9">
       <!--Body content-->
 
-      <ul class="posts">
-        <li ng-repeat="post in posts | filter:query | orderBy:orderProp" class="thumbnail">
-          <a href="#/posts/{{post.id}}" class="thumb"></a>
-          <a href="#/posts/{{post.id}}">{{post.title}}</a>
-          <p>{{post.content}}</p>
-        </li>
-      </ul>
+        <h2>{{postDetail.title}}
+            <small>
+                by: {{ postDetail.owner }}
+            </small>
+
+        </h2>
+        <p>{{postDetail.content}}</p>
 
     </div>
   </div>
