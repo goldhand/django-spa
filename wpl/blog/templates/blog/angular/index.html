@@ -7,6 +7,7 @@
     <div class="row">
         <div class="span3">
             <div class="well">
+                <div ng-controller="PostListCtrl">
                 <!--Sidebar content-->
 
                 Search: <input ng-model="query" class="input-block-level">
@@ -17,18 +18,14 @@
                 </select>
 
                 <ul class="nav nav-stacked nav-pills">
-                    {% for post in posts %}
-                        <li>
-                            <a href="/#/posts/{{ post.id }}">{{ post.title }}</a>
-                        </li>
-                    {% endfor %}
-                {% comment %}
-                    <li ng-repeat="post in posts | filter:query | orderBy:orderProp">
+                    <li ng-repeat="post in posts | filter:query | orderBy:-orderProp">
+                        {% verbatim %}
                         <a ng-click="updateUrl(post.id)">{{post.title}}</a>
+                        {% endverbatim %}
                     </li>
-                {% endcomment %}
                 </ul>
 
+                </div>
             </div>
         </div>
     <div class="posts-animate-container">
@@ -64,6 +61,7 @@
   left:0;
   right:0;
   bottom:0;
+    background-color: #fff;
 }
 
 .posts-animate-container {

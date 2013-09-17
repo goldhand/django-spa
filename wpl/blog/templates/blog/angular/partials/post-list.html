@@ -1,5 +1,6 @@
 {% verbatim %}
-<div ng-controller="PostDetailCtrl">
+
+<div ng-controller="PostListCtrl">
         <div class="span9">
             <!--Body content-->
             <div>
@@ -27,8 +28,8 @@
 
                 <div class="clearfix"></div>
                 <div class="content">
-                    <p>
-                        {{ post.content }}
+                    <p ng-bind-html="postContent()">
+
                     </p>
                 </div>
 

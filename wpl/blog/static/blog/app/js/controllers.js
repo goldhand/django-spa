@@ -11,9 +11,6 @@ function PostListCtrl($scope, $routeParams, $location, Post) {
       }
 
   });
-  $scope.viewDetail = function(postContent) {
-      $scope.post = postContent;
-  };
 
   $scope.updateUrl = function(postId) {
       $location.path('posts/'+postId);
@@ -25,9 +22,13 @@ function PostListCtrl($scope, $routeParams, $location, Post) {
 //PhoneListCtrl.$inject = ['$scope', '$http'];
 
 
-function PostDetailCtrl($scope, $routeParams, Post) {
-    $scope.post = Post.get({postId: $routeParams.postId});
-    $scope.orderProp = 'age';
+function PostDetailCtrl($scope, $routeParams, $sce, Post) {
+    $scope.post = Post.get({postId: $routeParams.postId}, function (post) {
+        $scope.postContent = function() {
+            return $sce.trustAsHtml(post.content);
+        };
+    });
+    $scope.orderProp = 'created';
 }
 
 //PhoneDetailCtrl.$inject = ['$scope', '$routeParams'];

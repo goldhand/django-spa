@@ -1,31 +1,40 @@
 {% verbatim %}
+<div ng-controller="PostDetailCtrl">
+    <div class="span9">
+        <!--Body content-->
+        <div>
+            <small class="pull-right">
+                <dl class="dl-horizontal">
+                    <dt>
+                        Author :
+                    </dt>
+                    <dd>
+                        {{ post.owner }}
+                    </dd>
+                    <dt>
+                        Posted :
+                    </dt>
+                    <dd>
+                        {{ post.created }}
+                    </dd>
 
-<div class="container">
-    <div class="row">
-        <div class="span3">
-            <!--Sidebar content-->
+                </dl>
+            </small>
 
-            Search: <input ng-model="query" class="input-block-level">
-            Sort by:
-            <select ng-model="orderProp" class="input-block-level">
-                <option value="title">Alphabetical</option>
-                <option value="created">Newest</option>
-            </select>
-
-        </div>
-        <div class="span9">
-            <!--Body content-->
             <h1>
                 {{ post.title }}
-                <small>
-                    create: {{ post.created }}, by: {{ post.owner }}
-                </small>
             </h1>
-            <p>
-                {{ post.content }}
-            </p>
+
+            <div class="clearfix"></div>
+            <div class="content">
+                <p ng-bind-html="postContent()">
+
+                </p>
+            </div>
+
 
         </div>
+
     </div>
 </div>
 {% endverbatim %}

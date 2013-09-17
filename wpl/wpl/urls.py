@@ -13,7 +13,7 @@ urlpatterns = patterns('',
                        url(r'^api/todo/', include("backbone.urls")),
                        url(r'^api/blog/', include('blog.urls')),
                        url(r'^api/books/', include('books.urls', namespace='books')),
-                       url(r'^api', include('snippets.urls')),
+                       url(r'^api/', include('snippets.urls')),
                        url(r'^$', 'blog.views.angular_view'),
                        #url(r'^', include(router.urls)),
 )
