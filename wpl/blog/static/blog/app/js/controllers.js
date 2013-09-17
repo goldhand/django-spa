@@ -2,21 +2,25 @@
 
 /* Controllers */
 
-function PostListCtrl($scope, $routeParams, $location, Post) {
-  $scope.posts = Post.query(function(posts) {
-      if ($routeParams.postId) {
-          $scope.post = Post.get({postId: $routeParams.postId});
-      } else {
-          $scope.post = posts[0];
-      }
+function PostListCtrl($scope, $routeParams, $location, $http, Post) {
+    $scope.posts = Post.query(function (posts) {
+        if ($routeParams.postId) {
+            $scope.post = Post.get({postId: $routeParams.postId});
+        } else {
+            $scope.post = posts[0];
+        }
 
-  });
+    });
 
-  $scope.updateUrl = function(postId) {
-      $location.path('posts/'+postId);
+    $scope.updateUrl = function (postId) {
+        $location.path('posts/' + postId);
     };
-
-  $scope.orderProp = 'created';
+    $scope.getPosts = function (url) {
+        $http.get(url).success(function(data) {
+            $scope.posts = data;
+        });
+    };
+    $scope.orderProp = 'created';
 }
 
 //PhoneListCtrl.$inject = ['$scope', '$http'];
@@ -24,7 +28,7 @@ function PostListCtrl($scope, $routeParams, $location, Post) {
 
 function PostDetailCtrl($scope, $routeParams, $sce, Post) {
     $scope.post = Post.get({postId: $routeParams.postId}, function (post) {
-        $scope.postContent = function() {
+        $scope.postContent = function () {
             return $sce.trustAsHtml(post.content);
         };
     });

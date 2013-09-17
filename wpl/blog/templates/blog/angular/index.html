@@ -18,12 +18,14 @@
                 </select>
 
                 <ul class="nav nav-stacked nav-pills">
-                    <li ng-repeat="post in posts | filter:query | orderBy:-orderProp">
+                    <li ng-repeat="post in posts.results | filter:query | orderBy:-orderProp">
                         {% verbatim %}
                         <a ng-click="updateUrl(post.id)">{{post.title}}</a>
                         {% endverbatim %}
                     </li>
                 </ul>
+                    <a ng-click="getPosts(posts.previous)">Previous</a>
+                    <a ng-click="getPosts(posts.next)">Next</a>
 
                 </div>
             </div>
