@@ -17,5 +17,5 @@ class Post(models.Model):
     owner = models.ForeignKey('auth.user', related_name='posts')
 
     class Meta:
-        ordering = ('created',)
+        ordering = ('-created',)
 

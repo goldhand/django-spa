@@ -4,9 +4,15 @@
 
 //noinspection JSValidateTypes
 angular.module('posts', ['postsServices']).
-  config(['$routeProvider', function($routeProvider) {
+
+  config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $routeProvider.
-      when('/posts', {templateUrl: '/blog/angular/partials/post-list.html',   controller: PostListCtrl}).
-      when('/posts/:postId', {templateUrl: '/blog/angular/partials/post-detail.html', controller: PostDetailCtrl}).
+      //when('/posts', {templateUrl: '/api/blog/angular/partials/post-list/'}).
+      when('/posts/:postId', {templateUrl: '/api/blog/angular/partials/post-list/'}, {controller: 'PostListCtrl'}).
       otherwise({redirectTo: '/posts'});
-}]);
+    }])
+
+
+;
+
+

@@ -3,7 +3,6 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework.routers import DefaultRouter
 from rest_framework import renderers
 
-
 import views
 from .views import PostViewSet
 
@@ -15,22 +14,21 @@ router.register(r'posts', views.PostViewSet)
 # The API URLs are now determined automatically by the router.
 # Additionally. we include the login URLs for the browseable API.
 post_list = PostViewSet.as_view({
-        'get': 'list',
-        'post': 'create'
+    'get': 'list',
+    'post': 'create'
 })
 post_detail = PostViewSet.as_view({
-        'get': 'retrieve',
-        'put': 'update',
-        'patch': 'partial_update',
-        'delete': 'destroy'
+    'get': 'retrieve',
+    'put': 'update',
+    'patch': 'partial_update',
+    'delete': 'destroy'
 })
 
 urlpatterns = patterns('blog.views',
-	url(r'^$', 'blog'),
-	url(r'^posts/$', post_list, name='post-list'),
-    url(r'^posts/(?P<pk>[0-9]+)/$', post_detail, name='post-detail'),
-    url(r'^app/index\.html', 'angular_view'),
-    url(r'^angular/partials/post-list\.html', 'angular_view_post_list'),
-    url(r'^angular/partials/post-detail\.html', 'angular_view_post_detail'),
-    )
+                       url(r'^$', 'blog'),
+                       url(r'^posts/$', post_list, name='post-list'),
+                       url(r'^posts/(?P<pk>[0-9]+)/$', post_detail, name='post-detail'),
+                       url(r'^angular/partials/post-list/', 'angular_view_post_list'),
+                       url(r'^angular/partials/post-detail/', 'angular_view_post_detail'),
+)
 

@@ -63,7 +63,7 @@ def angular_view(request, templateUrl=None):
         return render(request, templateUrl)
 
 def angular_view(request):
-    return render(request, 'blog/angular/index.html')
+    return render(request, 'blog/angular/index.html', {'posts': Post.objects.all()})
 
 def angular_view_post_list(request):
     return render(request, 'blog/angular/partials/post-list.html')

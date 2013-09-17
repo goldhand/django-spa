@@ -1,35 +1,43 @@
 {% verbatim %}
-<div class="container">
-  <div class="row">
-    <div class="span3">
-      <!--Sidebar content-->
+<div ng-controller="PostListCtrl">
+        <div class="span9">
+            <!--Body content-->
+            <div>
+                <small class="pull-right">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Author :
+                        </dt>
+                        <dd>
+                            {{ post.owner }}
+                        </dd>
+                        <dt>
+                            Posted :
+                        </dt>
+                        <dd>
+                            {{ post.created }}
+                        </dd>
 
-      Search: <input ng-model="query" class="input-block-level">
-      Sort by:
-      <select ng-model="orderProp" class="input-block-level">
-        <option value="title">Alphabetical</option>
-        <option value="created">Newest</option>
-      </select>
+                    </dl>
+                </small>
 
-        <ul class="posts nav nav-stacked nav-pills">
-            <li ng-repeat="post in posts | filter:query | orderBy:orderProp" class="thumbnail">
-                <a ng-click="viewDetail(post)">{{post.title}}</a>
-            </li>
-        </ul>
+                <h1>
+                    {{ post.title }}
+                </h1>
 
+                <div class="clearfix"></div>
+                <div class="content">
+                    <p>
+                        {{ post.content }}
+                    </p>
+                    <a href="#/posts/{{post.id}}" class="btn btn-primary">
+                        Read more...
+                    </a>
+                </div>
+
+
+            </div>
+
+        </div>
     </div>
-    <div class="span9">
-      <!--Body content-->
-
-        <h2>{{postDetail.title}}
-            <small>
-                by: {{ postDetail.owner }}
-            </small>
-
-        </h2>
-        <p>{{postDetail.content}}</p>
-
-    </div>
-  </div>
-</div>
 {% endverbatim %}

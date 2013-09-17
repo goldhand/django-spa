@@ -2,5 +2,37 @@
 {% load staticfiles %}
 
 {% block content %}
-<div ng-view ng-animate=" 'animate' "></div>
+   <div class="" ng-app="posts">
+    <div class="container">
+    <div class="row">
+        <div class="span3">
+            <div class="well">
+                <!--Sidebar content-->
+
+                Search: <input ng-model="query" class="input-block-level">
+                Sort by:
+                <select ng-model="orderProp" class="input-block-level">
+                    <option value="title">Alphabetical</option>
+                    <option value="created">Newest</option>
+                </select>
+
+                <ul class="nav nav-stacked nav-pills">
+                    {% for post in posts %}
+                        <li>
+                            <a href="/#/posts/{{ post.id }}">{{ post.title }}</a>
+                        </li>
+                    {% endfor %}
+                {% comment %}
+                    <li ng-repeat="post in posts | filter:query | orderBy:orderProp">
+                        <a ng-click="updateUrl(post.id)">{{post.title}}</a>
+                    </li>
+                {% endcomment %}
+                </ul>
+
+            </div>
+        </div>
+       <div ng-view ng-animate=" 'animate' "></div>
+   </div>
+    </div>
+   </div>
 {% endblock content %}

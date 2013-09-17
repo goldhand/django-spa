@@ -2,15 +2,24 @@
 
 /* Controllers */
 
-function PostListCtrl($scope, Post) {
+function PostListCtrl($scope, $routeParams, $location, Post) {
   $scope.posts = Post.query(function(posts) {
-      $scope.postDetail = posts[0];
+      if ($routeParams.postId) {
+          $scope.post = Post.get({postId: $routeParams.postId});
+      } else {
+          $scope.post = posts[0];
+      }
+
   });
   $scope.viewDetail = function(postContent) {
-      $scope.postDetail = postContent;
-  }
+      $scope.post = postContent;
+  };
 
-  $scope.orderProp = 'age';
+  $scope.updateUrl = function(postId) {
+      $location.path('posts/'+postId);
+    };
+
+  $scope.orderProp = 'created';
 }
 
 //PhoneListCtrl.$inject = ['$scope', '$http'];
@@ -22,3 +31,6 @@ function PostDetailCtrl($scope, $routeParams, Post) {
 }
 
 //PhoneDetailCtrl.$inject = ['$scope', '$routeParams'];
+
+
+
