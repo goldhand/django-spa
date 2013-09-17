@@ -2,12 +2,11 @@
 
 /* Controllers */
 
-function PostListCtrl($scope, $routeParams, $location, $http, Post) {
+function PostListCtrl($scope, $routeParams, $location, $http, $sce, Post) {
     $scope.posts = Post.query(function (posts) {
-        if ($routeParams.postId) {
-            $scope.post = Post.get({postId: $routeParams.postId});
-        } else {
-            $scope.post = posts[0];
+        for (var i=0; i < posts.results.length; i++) {
+            $scope.posts.results[i].content = $sce.trustAsHtml(posts.results[i].content.split(' ', 50).join(' '));
+
         }
 
     });
@@ -20,6 +19,15 @@ function PostListCtrl($scope, $routeParams, $location, $http, Post) {
             $scope.posts = data;
         });
     };
+    $scope.appendPosts = function (url) {
+        $http.get(url).success(function(data) {
+            for (var i=0; i < data.results.length; i++) {
+                data.results[i].content = $sce.trustAsHtml(data.results[i].content.split(' ', 50).join(' '));
+            }
+            $scope.posts.results = $scope.posts.results.concat(data.results);
+            $scope.posts.next = data.next;
+        });
+    };
     $scope.orderProp = 'created';
 }
 
@@ -27,10 +35,10 @@ function PostListCtrl($scope, $routeParams, $location, $http, Post) {
 
 
 function PostDetailCtrl($scope, $routeParams, $sce, Post) {
+    // Note: this error "http://docs.angularjs.org/error/$rootScope:infdig" was fixed by making postContent a variable
+    // instead of a function
     $scope.post = Post.get({postId: $routeParams.postId}, function (post) {
-        $scope.postContent = function () {
-            return $sce.trustAsHtml(post.content);
-        };
+        $scope.postContent =  $sce.trustAsHtml(post.content);
     });
     $scope.orderProp = 'created';
 }

@@ -6,16 +6,20 @@
     <div class="container">
     <div class="row">
         <div class="span3">
-            <div class="well">
+            {% block branding %}<a class='brand' href='http://github.com/goldhand/'>@goldhand</a> | <a href='/'>django-rest-blog <span class="version">0.1</span></a>{% endblock %}
+            <div class="well hidden-phone">
+                <!--TODO:Update to bootstrap 3.0 so this can be placed after content for mobile only view-->
                 <div ng-controller="PostListCtrl">
                 <!--Sidebar content-->
 
-                Search: <input ng-model="query" class="input-block-level">
+                <input ng-model="query" placeholder="search" class="search-query input-block-level">
+                    <!--
                 Sort by:
                 <select ng-model="orderProp" class="input-block-level">
                     <option value="title">Alphabetical</option>
                     <option value="created">Newest</option>
                 </select>
+                -->
 
                 <ul class="nav nav-stacked nav-pills">
                     <li ng-repeat="post in posts.results | filter:query | orderBy:-orderProp">
@@ -24,15 +28,18 @@
                         {% endverbatim %}
                     </li>
                 </ul>
-                    <a ng-click="getPosts(posts.previous)">Previous</a>
-                    <a ng-click="getPosts(posts.next)">Next</a>
+                    <a ng-click="getPosts(posts.previous)" class="pull-left"><i class="icon-arrow-left"></i></a>
+
+                    <a ng-click="getPosts(posts.next)" class="pull-right"><i class="icon-arrow-right"></i></a>
 
                 </div>
             </div>
         </div>
-    <div class="posts-animate-container">
-        <div ng-view class="post-detail-view"></div>
-    </div>
+        <div class="span9">
+            <div class="posts-animate-container">
+                <div ng-view class="post-detail-view"></div>
+            </div>
+        </div>
    </div>
     </div>
    </div>
@@ -44,10 +51,9 @@
    <style>
 .posts-animate-container {
   overflow:hidden;
-  min-height: 500px;
+  min-height: 2000px;
 
 }
-
 
 .post-detail-view.ng-enter, .post-detail-view.ng-leave {
   -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;

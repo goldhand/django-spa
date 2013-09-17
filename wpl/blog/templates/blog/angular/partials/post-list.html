@@ -1,41 +1,30 @@
 {% verbatim %}
 
 <div ng-controller="PostListCtrl">
-        <div class="span9">
             <!--Body content-->
-            <div>
-                <small class="pull-right">
-                    <dl class="dl-horizontal">
-                        <dt>
-                            Author :
-                        </dt>
-                        <dd>
-                            {{ post.owner }}
-                        </dd>
-                        <dt>
-                            Posted :
-                        </dt>
-                        <dd>
-                            {{ post.created }}
-                        </dd>
 
-                    </dl>
-                </small>
+    <input ng-model="query" placeholder="search" class="search-query input-block-level">
 
-                <h1>
-                    {{ post.title }}
-                </h1>
+        <div ng-repeat="post in posts.results | filter:query | orderBy:-orderProp">
+
+                <h2>
+                    <a ng-click="updateUrl(post.id)">{{post.title}}</a>
+                    <small>
+                                @{{ post.owner }} |
+                                {{ post.created }}
+                    </small>
+                </h2>
 
                 <div class="clearfix"></div>
                 <div class="content">
-                    <p ng-bind-html="postContent()">
+                    <p ng-bind-html="post.content">
 
                     </p>
                 </div>
 
 
-            </div>
-
         </div>
-    </div>
+    <a class="btn" ng-click="appendPosts(posts.next)">Load More</a>
+
+</div>
 {% endverbatim %}
